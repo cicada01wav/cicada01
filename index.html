@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>cicada01</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: black;
+      color: white;
+      font-family: 'Great Vibes', cursive;
+      overflow-x: hidden;
+    }
+
+    /* INTRO */
+
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      animation: introFadeOut 2s ease forwards;
+      animation-delay: 3.5s;
+    }
+
+    .intro-logo {
+      width: 380px;
+      filter: invert(1);
+      opacity: 0;
+      transform: scale(0.75);
+      animation:
+        logoAppear 2.8s ease forwards,
+        logoPulse 5s ease-in-out infinite;
+    }
+
+    @keyframes logoAppear {
+
+      0% {
+        opacity: 0;
+        transform: scale(0.55);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+    }
+
+    @keyframes logoPulse {
+
+      0% {
+        filter: invert(1) drop-shadow(0 0 0px white);
+      }
+
+      50% {
+        filter: invert(1) drop-shadow(0 0 18px white);
+      }
+
+      100% {
+        filter: invert(1) drop-shadow(0 0 0px white);
+      }
+
+    }
+
+    @keyframes introFadeOut {
+
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+    }
+
+    /* SITE */
+
+    #siteContent {
+      opacity: 0;
+      animation: siteAppear 2s ease forwards;
+      animation-delay: 3s;
+    }
+
+    @keyframes siteAppear {
+
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 20px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* HERO */
+
+    .hero {
+      height: 45vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo {
+      width: 320px;
+      filter: invert(1);
+      opacity: 0.9;
+    }
+
+    /* TITRES */
+
+    .section-title {
+      width: 100%;
+      text-align: left;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      opacity: 0.7;
+      letter-spacing: 1px;
+      padding-left: 60px;
+    }
+
+    /* SCROLL */
+
+    .scroll-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .horizontal-scroll {
+      display: flex;
+      gap: 15px;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      padding: 10px 50px;
+    }
+
+    /* CARDS */
+
+    .card {
+      min-width: 600px;
+      height: 340px;
+      background: #111;
+      border-radius: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid #333;
+      position: relative;
+
+      transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.015);
+      filter: brightness(1.08);
+    }
+
+    /* POSTERS */
+
+    .poster-card {
+      min-width: 390px;
+      height: 540px;
+      background: #111;
+      border-radius: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid #333;
+      position: relative;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.45s ease,
+        filter 0.45s ease,
+        box-shadow 0.45s ease;
+    }
+
+    .poster-card:hover {
+      transform: scale(1.04);
+      filter: brightness(1.06);
+      box-shadow: 0 0 35px rgba(255,255,255,0.08);
+    }
+
+    .spotify-card {
+      min-width: 400px;
+      height: 400px;
+    }
+
+    .youtube-thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* YOUTUBE PLAYER */
+
+    .youtube-player {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ARROWS */
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 10;
+
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        opacity 0.3s ease;
+
+      backdrop-filter: blur(8px);
+
+      opacity: 0.75;
+    }
+
+    .arrow:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-50%) scale(1.08);
+      opacity: 1;
+    }
+
+    .left {
+      left: 0;
+    }
+
+    .right {
+      right: 0;
+    }
+
+    /* FOOTER */
+
+    footer {
+      text-align: center;
+      padding: 40px 0 30px;
+      font-size: 2rem;
+      opacity: 0.7;
+    }
+
+    /* IMAGE VIEWER */
+
+    #imageViewer {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.96);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      opacity: 0;
+      pointer-events: none;
+
+      transition: 0.5s ease;
+
+      z-index: 99999;
+
+      backdrop-filter: blur(14px);
+    }
+
+    #imageViewer.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #fullscreenImage {
+      max-width: 92%;
+      max-height: 92%;
+      border-radius: 18px;
+
+      transform: scale(0.92);
+      opacity: 0;
+
+      transition:
+        transform 0.5s ease,
+        opacity 0.5s ease;
+
+      box-shadow: 0 0 50px rgba(255,255,255,0.12);
+    }
+
+    #imageViewer.active #fullscreenImage {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <audio id="introSound" autoplay>
+    <source src="sound.wav" type="audio/wav">
+  </audio>
+
+  <!-- INTRO -->
+
+  <div id="intro">
+    <img src="logo.png" alt="Logo Intro" class="intro-logo">
+  </div>
+
+  <!-- SITE -->
+
+  <div id="siteContent">
+
+    <!-- HERO -->
+
+    <section class="hero">
+      <img src="logo.png" alt="Logo" class="logo">
+    </section>
+
+    <!-- 01LIVE -->
+
+    <section>
+
+      <div class="section-title">
+        01Live
+      </div>
+
+      <div class="scroll-wrapper">
+
+        <button class="arrow left" onclick="scrollLeftCustom('liveScroll')">
+          ‹
+        </button>
+
+        <div class="horizontal-scroll" id="liveScroll">
+
+          <div class="card">
+
+            <iframe
+              class="youtube-player"
+              src="https://www.youtube.com/embed/2vS14wk0Q0Q?start=350&rel=0"
+              allowfullscreen>
+            </iframe>
+
+          </div>
+
+        </div>
+
+        <button class="arrow right" onclick="scrollRightCustom('liveScroll')">
+          ›
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- LIVE REC/MIX -->
+
+    <section>
+
+      <div class="section-title">
+        Live Rec/Mix
+      </div>
+
+      <div class="scroll-wrapper">
+
+        <button class="arrow left" onclick="scrollLeftCustom('recmixScroll')">
+          ‹
+        </button>
+
+        <div class="horizontal-scroll" id="recmixScroll">
+
+          <div class="card">
+
+            <iframe
+              class="youtube-player"
+              src="https://www.youtube.com/embed/DYDiQLF5u4w?rel=0"
+              allowfullscreen>
+            </iframe>
+
+          </div>
+
+          <div class="card">
+
+            <iframe
+              class="youtube-player"
+              src="https://www.youtube.com/embed/videoseries?list=PLoC1Vwq1D5hScTadS76bamtfpcnuNiqVR"
+              allowfullscreen>
+            </iframe>
+
+          </div>
+
+          <div class="card">
+
+            <iframe
+              class="youtube-player"
+              src="https://www.youtube.com/embed/2YgXEr-Uou8?rel=0"
+              allowfullscreen>
+            </iframe>
+
+          </div>
+
+          <div class="card">
+
+            <iframe
+              class="youtube-player"
+              src="https://www.youtube.com/embed/2vS14wk0Q0Q?rel=0"
+              allowfullscreen>
+            </iframe>
+
+          </div>
+
+        </div>
+
+        <button class="arrow right" onclick="scrollRightCustom('recmixScroll')">
+          ›
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- LIVE MIX -->
+
+    <section>
+
+      <div class="section-title">
+        Live Mix
+      </div>
+
+      <div class="scroll-wrapper">
+
+        <button class="arrow left" onclick="scrollLeftCustom('livemixScroll')">
+          ‹
+        </button>
+
+        <div class="horizontal-scroll" id="livemixScroll">
+
+          <div class="poster-card" onclick="openImage('babylove.jpg')">
+            <img class="youtube-thumbnail" src="babylove.jpg">
+          </div>
+
+          <div class="poster-card" onclick="openImage('quasar.jpg')">
+            <img class="youtube-thumbnail" src="quasar.jpg">
+          </div>
+
+          <div class="poster-card" onclick="openImage('serom.jpg')">
+            <img class="youtube-thumbnail" src="serom.jpg">
+          </div>
+
+          <div class="poster-card" onclick="openImage('caves.jpg')">
+            <img class="youtube-thumbnail" src="caves.jpg">
+          </div>
+
+          <div class="poster-card" onclick="openImage('kosse.jpg')">
+            <img class="youtube-thumbnail" src="kosse.jpg">
+          </div>
+
+          <div class="poster-card" onclick="openImage('summer.jpg')">
+            <img class="youtube-thumbnail" src="summer.jpg">
+          </div>
+
+        </div>
+
+        <button class="arrow right" onclick="scrollRightCustom('livemixScroll')">
+          ›
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- SPOTIFY -->
+
+    <section>
+
+      <div class="scroll-wrapper">
+
+        <button class="arrow left" onclick="scrollLeftCustom('spotifyScroll')">
+          ‹
+        </button>
+
+        <div class="horizontal-scroll" id="spotifyScroll">
+
+          <div class="card spotify-card">
+            <iframe src="https://open.spotify.com/embed/album/54ahbsuYE1eGZ8Hwf9X5Sg"></iframe>
+          </div>
+
+          <div class="card spotify-card">
+            <iframe src="https://open.spotify.com/embed/album/0SCTiddTOhUVMAjvmSHQ3h"></iframe>
+          </div>
+
+        </div>
+
+        <button class="arrow right" onclick="scrollRightCustom('spotifyScroll')">
+          ›
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- 01RADIO -->
+
+    <section>
+
+      <div class="section-title">
+        01Radio
+      </div>
+
+      <div class="scroll-wrapper">
+
+        <button class="arrow left" onclick="scrollLeftCustom('radioScroll')">
+          ‹
+        </button>
+
+        <div class="horizontal-scroll" id="radioScroll">
+
+          <div class="card">
+
+            <iframe
+              class="youtube-player"
+              src="https://www.youtube.com/embed/InwWBPVvvJY?rel=0"
+              allowfullscreen>
+            </iframe>
+
+          </div>
+
+        </div>
+
+        <button class="arrow right" onclick="scrollRightCustom('radioScroll')">
+          ›
+        </button>
+
+      </div>
+
+    </section>
+
+    <footer>
+      cicada33.wav@gmail.com
+    </footer>
+
+  </div>
+
+  <!-- IMAGE VIEWER -->
+
+  <div id="imageViewer" onclick="closeImage()">
+    <img id="fullscreenImage">
+  </div>
+
+  <script>
+
+    function scrollRightCustom(id) {
+
+      const container = document.getElementById(id);
+
+      if (
+        container.scrollLeft + container.clientWidth
+        >= container.scrollWidth - 10
+      ) {
+
+        container.scrollTo({
+          left: 0,
+          behavior: 'smooth'
+        });
+
+      } else {
+
+        container.scrollBy({
+          left: 650,
+          behavior: 'smooth'
+        });
+
+      }
+
+    }
+
+    function scrollLeftCustom(id) {
+
+      const container = document.getElementById(id);
+
+      if (container.scrollLeft <= 10) {
+
+        container.scrollTo({
+          left: container.scrollWidth,
+          behavior: 'smooth'
+        });
+
+      } else {
+
+        container.scrollBy({
+          left: -650,
+          behavior: 'smooth'
+        });
+
+      }
+
+    }
+
+    function openImage(src) {
+
+      document.getElementById("fullscreenImage").src = src;
+
+      document.getElementById("imageViewer").classList.add("active");
+
+    }
+
+    function closeImage() {
+
+      document.getElementById("imageViewer").classList.remove("active");
+
+    }
+
+  </script>
+
+</body>
+</html>
