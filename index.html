@@ -389,8 +389,8 @@
     }
 
     .poster-card {
-      min-width: 340px;
-      height: 470px;
+      min-width: 280px;
+      height: 395px;
       background: #111;
       border-radius: 20px;
       overflow: hidden;
@@ -427,7 +427,8 @@
     .youtube-thumbnail {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      background: black;
     }
 
     iframe {
@@ -555,6 +556,40 @@
     }
 
     #fullscreenImage {
+      max-width: 84%;
+      max-height: 90%; transform: translateY(-50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 100000;
+      backdrop-filter: blur(8px);
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        background 0.3s ease;
+      opacity: 0.7;
+    }
+
+    .viewer-arrow:hover {
+      opacity: 1;
+      transform: translateY(-50%) scale(1.08);
+      background: rgba(255,255,255,0.16);
+    }
+
+    .viewer-left {
+      left: 24px;
+    }
+
+    .viewer-right {
+      right: 24px;
+    }
+
+    #fullscreenImage {
       max-width: 92%;
       max-height: 92%;
       border-radius: 18px;
@@ -647,8 +682,8 @@
       }
 
       .poster-card {
-        min-width: 170px;
-        height: 245px;
+        min-width: 135px;
+        height: 190px;
         border-radius: 16px;
       }
 
@@ -945,8 +980,16 @@
     </a>
   </div>
 
-  <div id="imageViewer" onclick="closeImage()">
+  <div id="imageViewer">
+    <button class="viewer-arrow viewer-left" onclick="prevImage(event)">
+      ‹
+    </button>
+
     <img id="fullscreenImage">
+
+    <button class="viewer-arrow viewer-right" onclick="nextImage(event)">
+      ›
+    </button>
   </div>
 
   <script>
@@ -1087,7 +1130,22 @@
 
     }
 
+    const galleryImages = [
+      "babylove.jpg",
+      "quasar.jpg",
+      "IMG_4659.jpeg",
+      "serom.jpg",
+      "caves.jpg",
+      "kosse.jpg",
+      "IMG_4658.jpeg",
+      "summer.jpg"
+    ];
+
+    let currentImageIndex = 0;
+
     function openImage(src) {
+
+      currentImageIndex = galleryImages.indexOf(src);
 
       document.getElementById("fullscreenImage").src = src;
 
@@ -1101,6 +1159,42 @@
 
     function closeImage() {
       document.getElementById("imageViewer").classList.remove("active");
+    }
+
+    document.getElementById("imageViewer").addEventListener("click", (e) => {
+
+      if (
+        e.target.id === "imageViewer" ||
+        e.target.id === "fullscreenImage"
+      ) {
+        closeImage();
+      }
+
+    });
+
+    function nextImage(event) {
+
+      event.stopPropagation();
+
+      currentImageIndex =
+        (currentImageIndex + 1) % galleryImages.length;
+
+      document.getElementById("fullscreenImage").src =
+        galleryImages[currentImageIndex];
+
+    }
+
+    function prevImage(event) {
+
+      event.stopPropagation();
+
+      currentImageIndex =
+        (currentImageIndex - 1 + galleryImages.length)
+        % galleryImages.length;
+
+      document.getElementById("fullscreenImage").src =
+        galleryImages[currentImageIndex];
+
     }
 
     const timer = document.getElementById("timer");
