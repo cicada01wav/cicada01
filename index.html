@@ -1,4 +1,4 @@
-hihiha
+test
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -389,7 +389,7 @@ hihiha
     }
 
     .poster-card {
-      min-width: 280px;
+      min-width: 360px;
       width: fit-content;
       height: auto;
       background: #111;
@@ -429,16 +429,16 @@ hihiha
       width: auto;
       max-width: 100%;
       height: auto;
-      max-height: 395px;
-      }
-
-      @media (max-width: 768px) {
-        .youtube-thumbnail {
-          max-height: 190px;
-        }
+      max-height: 520px;
       object-fit: contain;
       display: block;
       background: black;
+    }
+
+    @media (max-width: 768px) {
+      .youtube-thumbnail {
+        max-height: 300px;
+      }
     }
 
     iframe {
@@ -751,7 +751,7 @@ hihiha
       }
 
       .poster-card {
-        min-width: 135px;
+        min-width: 210px;
         width: fit-content;
         height: auto;
         border-radius: 16px;
@@ -1329,19 +1329,6 @@ hihiha
             isLoopingFullscreen = false;
           }, 60);
 
-        });
-
-      }
-
-    });
-
-      }
-
-      if (scrollLeft <= 0) {
-
-        fullscreenScroll.scrollTo({
-          left: maxScroll,
-          behavior: "smooth"
         });
 
       }
