@@ -391,7 +391,7 @@
     }
 
     .poster-card {
-      min-width: 280px;
+      min-width: 360px;
       width: fit-content;
       height: auto;
       background: #111;
@@ -431,12 +431,12 @@
       width: auto;
       max-width: 100%;
       height: auto;
-      max-height: 395px;
+      max-height: 520px;
       }
 
       @media (max-width: 768px) {
         .youtube-thumbnail {
-          max-height: 190px;
+          max-height: 300px;
         }
       object-fit: contain;
       display: block;
@@ -753,7 +753,7 @@
       }
 
       .poster-card {
-        min-width: 135px;
+        min-width: 210px;
         width: fit-content;
         height: auto;
         border-radius: 16px;
@@ -1287,9 +1287,11 @@
 
     const fullscreenScroll = document.getElementById("fullscreenScroll");
 
+    let isLoopingFullscreen = false;
+
     fullscreenScroll.addEventListener("scroll", () => {
 
-      const cards = [...fullscreenScroll.children];
+      if (isLoopingFullscreen) return;
 
       const scrollLeft = fullscreenScroll.scrollLeft;
       const maxScroll =
@@ -1297,10 +1299,43 @@
 
       if (scrollLeft >= maxScroll - 5) {
 
-        fullscreenScroll.scrollTo({
-          left: 0,
-          behavior: "smooth"
+        isLoopingFullscreen = true;
+
+        requestAnimationFrame(() => {
+
+          fullscreenScroll.scrollTo({
+            left: 1,
+            behavior: "instant"
+          });
+
+          setTimeout(() => {
+            isLoopingFullscreen = false;
+          }, 60);
+
         });
+
+      }
+
+      if (scrollLeft <= 0) {
+
+        isLoopingFullscreen = true;
+
+        requestAnimationFrame(() => {
+
+          fullscreenScroll.scrollTo({
+            left: maxScroll - 2,
+            behavior: "instant"
+          });
+
+          setTimeout(() => {
+            isLoopingFullscreen = false;
+          }, 60);
+
+        });
+
+      }
+
+    });
 
       }
 
