@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,10 +7,14 @@
 
   <title>cicada01</title>
 
+  <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
 
@@ -21,11 +26,159 @@
       margin: 0;
       background: black;
       color: white;
+      transition:
+        background 0.6s ease,
+        color 0.6s ease,
+        filter 0.6s ease;
       font-family: 'Great Vibes', cursive;
       overflow-x: hidden;
+      position: relative;
+      cursor: default;
     }
 
-    /* INTRO */
+    #cursorGlow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,255,255,0.055) 0%,
+          rgba(255,255,255,0.02) 20%,
+          rgba(255,255,255,0) 70%
+        );
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s linear;
+      mix-blend-mode: screen;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.055;
+      background-image:
+        url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+      animation: noiseMove 0.25s infinite;
+    }
+
+    @keyframes noiseMove {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-1%, 1%); }
+      50% { transform: translate(1%, -1%); }
+      75% { transform: translate(-1%, -1%); }
+      100% { transform: translate(0, 0); }
+    }
+
+    body.inverted {
+      background: white;
+      color: black;
+    }
+
+    body.inverted section,
+    body.inverted footer,
+    body.inverted .section-title,
+    body.inverted #timer,
+    body.inverted #secretDiscord a {
+      color: black !important;
+    }
+
+    body.inverted .card,
+    body.inverted .poster-card {
+      border: 1px solid rgba(0,0,0,0.18);
+      background: #f2f2f2;
+    }
+
+    body.inverted .arrow {
+      background: rgba(0,0,0,0.08);
+      color: black;
+    }
+
+    body.inverted .arrow:hover {
+      background: rgba(0,0,0,0.16);
+    }
+
+    body.inverted .logo,
+    body.inverted .intro-logo {
+      filter: invert(0);
+    }
+
+    #secretDiscord {
+      position: fixed;
+      bottom: 18px;
+      left: 22px;
+      z-index: 999999;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+      transform: translateY(6px);
+    }
+
+    #secretDiscord a {
+      color: rgba(255,255,255,0.42);
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    #secretDiscord a:hover {
+      opacity: 1;
+    }
+
+    body.inverted #secretDiscord {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.08;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.03) 0px,
+          rgba(255,255,255,0.03) 1px,
+          transparent 2px,
+          transparent 4px
+        );
+      mix-blend-mode: soft-light;
+    }
+
+    .vignette {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 4;
+      background:
+        radial-gradient(
+          circle,
+          rgba(0,0,0,0) 38%,
+          rgba(0,0,0,0.18) 68%,
+          rgba(0,0,0,0.42) 100%
+        );
+      mix-blend-mode: multiply;
+    }
 
     #intro {
       position: fixed;
@@ -35,8 +188,8 @@
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      animation: introFadeOut 2s ease forwards;
-      animation-delay: 3.5s;
+      animation: introFadeOut 1s ease forwards;
+      animation-delay: 2s;
     }
 
     .intro-logo {
@@ -45,94 +198,147 @@
       opacity: 0;
       transform: scale(0.75);
       animation:
-        logoAppear 2.8s ease forwards,
-        logoPulse 5s ease-in-out infinite;
+        logoAppear 1.6s ease forwards,
+        logoPulse 3s ease-in-out infinite;
     }
 
     @keyframes logoAppear {
-
       0% {
         opacity: 0;
         transform: scale(0.55);
       }
-
       100% {
         opacity: 1;
         transform: scale(1);
       }
-
     }
 
     @keyframes logoPulse {
-
       0% {
         filter: invert(1) drop-shadow(0 0 0px white);
       }
-
       50% {
         filter: invert(1) drop-shadow(0 0 18px white);
       }
-
       100% {
         filter: invert(1) drop-shadow(0 0 0px white);
       }
-
     }
 
     @keyframes introFadeOut {
-
       to {
         opacity: 0;
         visibility: hidden;
       }
-
     }
-
-    /* SITE */
 
     #siteContent {
       opacity: 0;
-      animation: siteAppear 2s ease forwards;
-      animation-delay: 3s;
+      animation: siteAppear 1s ease forwards;
+      animation-delay: 2s;
+      position: relative;
+      z-index: 3;
     }
 
     @keyframes siteAppear {
-
       from {
         opacity: 0;
       }
-
       to {
         opacity: 1;
       }
-
     }
 
-    /* SECTIONS */
+    .site-wrapper {
+      transition:
+        filter 0.55s ease,
+        opacity 0.55s ease;
+    }
+
+    .site-wrapper.blur-active {
+      filter:
+        blur(14px)
+        brightness(0.35);
+    }
 
     section {
       padding: 20px 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
     }
 
-    /* HERO */
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     .hero {
       height: 45vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
+      z-index: 9999;
+      opacity: 1 !important;
+      transform: none !important;
     }
 
     .logo {
       width: 320px;
       filter: invert(1);
-      opacity: 0.9;
+      opacity: 0.92;
+      cursor: pointer;
+      position: relative;
+      z-index: 10000;
+      transition:
+        transform 0.45s ease,
+        filter 0.45s ease,
+        opacity 0.45s ease;
     }
 
-    /* TITRES */
+    .logo:hover {
+      transform: scale(1.12);
+      filter:
+        invert(1)
+        drop-shadow(0 0 12px rgba(255,255,255,0.75))
+        drop-shadow(0 0 32px rgba(255,255,255,0.4));
+      opacity: 1;
+    }
+
+    .logo.glitch {
+      animation: glitchAnim 0.18s linear;
+    }
+
+    @keyframes glitchAnim {
+      0% {
+        transform: translate(0);
+        filter:
+          invert(1)
+          drop-shadow(-4px 0 red)
+          drop-shadow(4px 0 cyan);
+      }
+      25% {
+        transform: translate(-2px, 1px);
+      }
+      50% {
+        transform: translate(2px, -1px);
+      }
+      75% {
+        transform: translate(-1px, -1px);
+      }
+      100% {
+        transform: translate(0);
+        filter:
+          invert(1)
+          drop-shadow(0 0 12px rgba(255,255,255,0.7));
+      }
+    }
 
     .section-title {
       width: 100%;
@@ -144,8 +350,6 @@
       padding-left: 60px;
     }
 
-    /* SCROLL */
-
     .scroll-wrapper {
       position: relative;
       width: 100%;
@@ -154,12 +358,16 @@
     .horizontal-scroll {
       display: flex;
       gap: 15px;
-      overflow-x: hidden;
+      overflow-x: auto;
       scroll-behavior: smooth;
       padding: 10px 50px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
 
-    /* CARDS */
+    .horizontal-scroll::-webkit-scrollbar {
+      display: none;
+    }
 
     .card {
       min-width: 600px;
@@ -170,7 +378,6 @@
       flex-shrink: 0;
       border: 1px solid #333;
       position: relative;
-
       transition:
         transform 0.5s ease,
         filter 0.5s ease;
@@ -181,8 +388,6 @@
       filter: brightness(1.08);
     }
 
-    /* POSTERS */
-
     .poster-card {
       min-width: 390px;
       height: 540px;
@@ -192,9 +397,7 @@
       flex-shrink: 0;
       border: 1px solid #333;
       position: relative;
-
       cursor: pointer;
-
       transition:
         transform 0.45s ease,
         filter 0.45s ease,
@@ -224,14 +427,10 @@
       border: none;
     }
 
-    /* YOUTUBE PLAYER */
-
     .youtube-player {
       width: 100%;
       height: 100%;
     }
-
-    /* ARROWS */
 
     .arrow {
       position: absolute;
@@ -246,14 +445,11 @@
       font-size: 2rem;
       cursor: pointer;
       z-index: 10;
-
       transition:
         transform 0.3s ease,
         background 0.3s ease,
         opacity 0.3s ease;
-
       backdrop-filter: blur(8px);
-
       opacity: 0.75;
     }
 
@@ -271,8 +467,6 @@
       right: 0;
     }
 
-    /* FOOTER */
-
     footer {
       text-align: center;
       padding: 40px 0 30px;
@@ -280,24 +474,69 @@
       opacity: 0.7;
     }
 
-    /* IMAGE VIEWER */
+    #timer {
+      position: fixed;
+      bottom: 18px;
+      right: 22px;
+      z-index: 999999;
+      font-family: 'Rajdhani', sans-serif;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      font-variant-numeric: tabular-nums;
+      min-width: 128px;
+      text-align: right;
+      color: rgba(255,255,255,0.72);
+      user-select: none;
+      opacity: 0;
+      transform: translateY(10px);
+      transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+    }
+
+    #timer.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #timer .date {
+      display: block;
+      margin-top: 2px;
+      font-size: 0.48rem;
+      opacity: 0.62;
+      letter-spacing: 1px;
+      text-align: right;
+    }
+
+    #timer .milliseconds {
+      display: inline-block;
+      width: 28px;
+      font-size: 0.5rem;
+      opacity: 0.58;
+      margin-left: 1px;
+      letter-spacing: 0.5px;
+      position: relative;
+      top: -1px;
+      text-align: left;
+    }
+
+    #timer:hover {
+      transform: scale(1.03);
+    }
 
     #imageViewer {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.96);
-
       display: flex;
       justify-content: center;
       align-items: center;
-
       opacity: 0;
       pointer-events: none;
-
       transition: 0.5s ease;
-
       z-index: 99999;
-
       backdrop-filter: blur(14px);
     }
 
@@ -310,14 +549,11 @@
       max-width: 92%;
       max-height: 92%;
       border-radius: 18px;
-
       transform: scale(0.92);
       opacity: 0;
-
       transition:
         transform 0.5s ease,
         opacity 0.5s ease;
-
       box-shadow: 0 0 50px rgba(255,255,255,0.12);
     }
 
@@ -326,262 +562,467 @@
       opacity: 1;
     }
 
+    @media (max-width: 768px) {
+
+      body {
+        cursor: auto;
+      }
+
+      #cursorGlow {
+        display: none;
+      }
+
+      body::after {
+        opacity: 0.04;
+      }
+
+      body::before {
+        opacity: 0.03;
+      }
+
+      .intro-logo {
+        width: 210px;
+      }
+
+      .hero {
+        height: 35vh;
+      }
+
+      .logo {
+        width: 180px;
+      }
+
+      .logo:hover {
+        transform: scale(1.04);
+      }
+
+      .site-wrapper.blur-active {
+        filter:
+          blur(5px)
+          brightness(0.55);
+      }
+
+      section {
+        padding: 10px 12px;
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+
+      .section-title {
+        font-size: 1.2rem;
+        padding-left: 20px;
+        margin-bottom: 12px;
+      }
+
+      .horizontal-scroll {
+        padding: 10px 20px;
+        gap: 12px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .card {
+        min-width: 85vw;
+        height: 220px;
+        border-radius: 16px;
+      }
+
+      .spotify-card {
+        min-width: 85vw;
+        height: 320px;
+      }
+
+      .poster-card {
+        min-width: 240px;
+        height: 340px;
+        border-radius: 16px;
+      }
+
+      .arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.4rem;
+        opacity: 0.6;
+      }
+
+      footer {
+        font-size: 1.25rem;
+        padding: 30px 20px 40px;
+      }
+
+      #fullscreenImage {
+        max-width: 96%;
+        max-height: 85%;
+        border-radius: 12px;
+      }
+
+      #timer {
+        bottom: 12px;
+        right: 12px;
+        font-size: 0.72rem;
+        padding: 8px 10px;
+        letter-spacing: 1px;
+      }
+
+    }
+
   </style>
 </head>
 
 <body>
 
+  <div id="cursorGlow"></div>
+
+  <div class="vignette"></div>
+
   <audio id="introSound" autoplay>
     <source src="sound.wav" type="audio/wav">
   </audio>
 
-  <!-- INTRO -->
-
   <div id="intro">
-    <img src="logo.png" alt="Logo Intro" class="intro-logo">
+    <img src="logo.png" alt="logo intro" class="intro-logo">
   </div>
-
-  <!-- SITE -->
 
   <div id="siteContent">
 
-    <!-- HERO -->
-
     <section class="hero">
-      <img src="logo.png" alt="Logo" class="logo">
+      <img src="logo.png" alt="logo" class="logo" id="mainLogo">
     </section>
 
-    <!-- 01LIVE -->
+    <div class="site-wrapper" id="siteWrapper">
 
-    <section>
+      <section>
 
-      <div class="section-title">
-        01Live
-      </div>
+        <div class="section-title">
+          01live
+        </div>
 
-      <div class="scroll-wrapper">
+        <div class="scroll-wrapper">
 
-        <button class="arrow left" onclick="scrollLeftCustom('liveScroll')">
-          ‹
-        </button>
+          <button class="arrow left" onclick="scrollLeftCustom('liveScroll')">
+            ‹
+          </button>
 
-        <div class="horizontal-scroll" id="liveScroll">
+          <div class="horizontal-scroll" id="liveScroll">
 
-          <div class="card">
+            <div class="card">
+              <iframe
+                class="youtube-player"
+                src="https://www.youtube.com/embed/2vS14wk0Q0Q?start=350&rel=0"
+                allowfullscreen>
+              </iframe>
+            </div>
 
-            <iframe
-              class="youtube-player"
-              src="https://www.youtube.com/embed/2vS14wk0Q0Q?start=350&rel=0"
-              allowfullscreen>
-            </iframe>
+          </div>
+
+          <button class="arrow right" onclick="scrollRightCustom('liveScroll')">
+            ›
+          </button>
+
+        </div>
+
+      </section>
+
+      <section>
+
+        <div class="section-title">
+          live rec/mix
+        </div>
+
+        <div class="scroll-wrapper">
+
+          <button class="arrow left" onclick="scrollLeftCustom('recmixScroll')">
+            ‹
+          </button>
+
+          <div class="horizontal-scroll" id="recmixScroll">
+
+            <div class="card">
+              <iframe
+                class="youtube-player"
+                src="https://www.youtube.com/embed/DYDiQLF5u4w?rel=0"
+                allowfullscreen>
+              </iframe>
+            </div>
+
+            <div class="card">
+              <iframe
+                class="youtube-player"
+                src="https://www.youtube.com/embed/videoseries?list=PLoC1Vwq1D5hScTadS76bamtfpcnuNiqVR"
+                allowfullscreen>
+              </iframe>
+            </div>
+
+            <div class="card">
+              <iframe
+                class="youtube-player"
+                src="https://www.youtube.com/embed/2YgXEr-Uou8?rel=0"
+                allowfullscreen>
+              </iframe>
+            </div>
+
+            <div class="card">
+              <iframe
+                class="youtube-player"
+                src="https://www.youtube.com/embed/2vS14wk0Q0Q?rel=0"
+                allowfullscreen>
+              </iframe>
+            </div>
+
+          </div>
+
+          <button class="arrow right" onclick="scrollRightCustom('recmixScroll')">
+            ›
+          </button>
+
+        </div>
+
+      </section>
+
+      <section>
+
+        <div class="section-title">
+          live mix
+        </div>
+
+        <div class="scroll-wrapper">
+
+          <button class="arrow left" onclick="scrollLeftCustom('livemixScroll')">
+            ‹
+          </button>
+
+          <div class="horizontal-scroll" id="livemixScroll">
+
+            <div class="poster-card" onclick="openImage('babylove.jpg')">
+              <img class="youtube-thumbnail" src="babylove.jpg">
+            </div>
+
+            <div class="poster-card" onclick="openImage('quasar.jpg')">
+              <img class="youtube-thumbnail" src="quasar.jpg">
+            </div>
+
+            <div class="poster-card" onclick="openImage('IMG_4659.jpeg')">
+              <img class="youtube-thumbnail" src="IMG_4659.jpeg">
+            </div>
+
+            <div class="poster-card" onclick="openImage('serom.jpg')">
+              <img class="youtube-thumbnail" src="serom.jpg">
+            </div>
+
+            <div class="poster-card" onclick="openImage('caves.jpg')">
+              <img class="youtube-thumbnail" src="caves.jpg">
+            </div>
+
+            <div class="poster-card" onclick="openImage('kosse.jpg')">
+              <img class="youtube-thumbnail" src="kosse.jpg">
+            </div>
+
+            <div class="poster-card" onclick="openImage('IMG_4658.jpeg')">
+              <img class="youtube-thumbnail" src="IMG_4658.jpeg">
+            </div>
+
+            <div class="poster-card" onclick="openImage('summer.jpg')">
+              <img class="youtube-thumbnail" src="summer.jpg">
+            </div>
+
+          </div>
+
+          <button class="arrow right" onclick="scrollRightCustom('livemixScroll')">
+            ›
+          </button>
+
+        </div>
+
+      </section>
+
+      <section>
+
+        <div class="section-title">
+          rec/mix
+        </div>
+
+        <div class="scroll-wrapper">
+
+          <button class="arrow left" onclick="scrollLeftCustom('spotifyScroll')">
+            ‹
+          </button>
+
+          <div class="horizontal-scroll" id="spotifyScroll">
+
+            <div class="card spotify-card">
+              <iframe src="https://open.spotify.com/embed/album/54ahbsuYE1eGZ8Hwf9X5Sg"></iframe>
+            </div>
+
+            <div class="card spotify-card">
+              <iframe src="https://open.spotify.com/embed/album/0SCTiddTOhUVMAjvmSHQ3h"></iframe>
+            </div>
+
+          </div>
+
+          <button class="arrow right" onclick="scrollRightCustom('spotifyScroll')">
+            ›
+          </button>
+
+        </div>
+
+      </section>
+
+      <section>
+
+        <div class="section-title">
+          01radio
+        </div>
+
+        <div class="scroll-wrapper">
+
+          <div class="horizontal-scroll" id="radioScroll">
+
+            <div class="card">
+
+              <iframe
+                class="youtube-player"
+                src="https://www.youtube.com/embed/live_stream?channel=UCS6b2lO4JHS3sM0pA7Q4l0Q"
+                allowfullscreen>
+              </iframe>
+
+            </div>
 
           </div>
 
         </div>
 
-        <button class="arrow right" onclick="scrollRightCustom('liveScroll')">
-          ›
-        </button>
-
-      </div>
-
-    </section>
-
-    <!-- LIVE REC/MIX -->
-
-    <section>
-
-      <div class="section-title">
-        Live Rec/Mix
-      </div>
-
-      <div class="scroll-wrapper">
-
-        <button class="arrow left" onclick="scrollLeftCustom('recmixScroll')">
-          ‹
-        </button>
-
-        <div class="horizontal-scroll" id="recmixScroll">
-
-          <div class="card">
-
-            <iframe
-              class="youtube-player"
-              src="https://www.youtube.com/embed/DYDiQLF5u4w?rel=0"
-              allowfullscreen>
-            </iframe>
-
-          </div>
-
-          <div class="card">
-
-            <iframe
-              class="youtube-player"
-              src="https://www.youtube.com/embed/videoseries?list=PLoC1Vwq1D5hScTadS76bamtfpcnuNiqVR"
-              allowfullscreen>
-            </iframe>
-
-          </div>
-
-          <div class="card">
-
-            <iframe
-              class="youtube-player"
-              src="https://www.youtube.com/embed/2YgXEr-Uou8?rel=0"
-              allowfullscreen>
-            </iframe>
-
-          </div>
-
-          <div class="card">
-
-            <iframe
-              class="youtube-player"
-              src="https://www.youtube.com/embed/2vS14wk0Q0Q?rel=0"
-              allowfullscreen>
-            </iframe>
-
-          </div>
-
-        </div>
-
-        <button class="arrow right" onclick="scrollRightCustom('recmixScroll')">
-          ›
-        </button>
-
-      </div>
-
-    </section>
-
-    <!-- LIVE MIX -->
-
-    <section>
-
-      <div class="section-title">
-        Live Mix
-      </div>
-
-      <div class="scroll-wrapper">
-
-        <button class="arrow left" onclick="scrollLeftCustom('livemixScroll')">
-          ‹
-        </button>
-
-        <div class="horizontal-scroll" id="livemixScroll">
-
-          <div class="poster-card" onclick="openImage('babylove.jpg')">
-            <img class="youtube-thumbnail" src="babylove.jpg">
-          </div>
-
-          <div class="poster-card" onclick="openImage('quasar.jpg')">
-            <img class="youtube-thumbnail" src="quasar.jpg">
-          </div>
-
-          <div class="poster-card" onclick="openImage('serom.jpg')">
-            <img class="youtube-thumbnail" src="serom.jpg">
-          </div>
-
-          <div class="poster-card" onclick="openImage('caves.jpg')">
-            <img class="youtube-thumbnail" src="caves.jpg">
-          </div>
-
-          <div class="poster-card" onclick="openImage('kosse.jpg')">
-            <img class="youtube-thumbnail" src="kosse.jpg">
-          </div>
-
-          <div class="poster-card" onclick="openImage('summer.jpg')">
-            <img class="youtube-thumbnail" src="summer.jpg">
-          </div>
-
-        </div>
-
-        <button class="arrow right" onclick="scrollRightCustom('livemixScroll')">
-          ›
-        </button>
-
-      </div>
-
-    </section>
-
-    <!-- SPOTIFY -->
-
-    <section>
-
-      <div class="scroll-wrapper">
-
-        <button class="arrow left" onclick="scrollLeftCustom('spotifyScroll')">
-          ‹
-        </button>
-
-        <div class="horizontal-scroll" id="spotifyScroll">
-
-          <div class="card spotify-card">
-            <iframe src="https://open.spotify.com/embed/album/54ahbsuYE1eGZ8Hwf9X5Sg"></iframe>
-          </div>
-
-          <div class="card spotify-card">
-            <iframe src="https://open.spotify.com/embed/album/0SCTiddTOhUVMAjvmSHQ3h"></iframe>
-          </div>
-
-        </div>
-
-        <button class="arrow right" onclick="scrollRightCustom('spotifyScroll')">
-          ›
-        </button>
-
-      </div>
-
-    </section>
-
-    <!-- 01RADIO -->
-
-    <section>
-
-      <div class="section-title">
-        01Radio
-      </div>
-
-      <div class="scroll-wrapper">
-
-        <button class="arrow left" onclick="scrollLeftCustom('radioScroll')">
-          ‹
-        </button>
-
-        <div class="horizontal-scroll" id="radioScroll">
-
-          <div class="card">
-
-            <iframe
-              class="youtube-player"
-              src="https://www.youtube.com/embed/InwWBPVvvJY?rel=0"
-              allowfullscreen>
-            </iframe>
-
-          </div>
-
-        </div>
-
-        <button class="arrow right" onclick="scrollRightCustom('radioScroll')">
-          ›
-        </button>
-
-      </div>
-
-    </section>
-
-    <footer>
-      cicada33.wav@gmail.com
-    </footer>
+      </section>
+
+      <footer>
+        <a
+          id="footerLink"
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=cicada33.wav@gmail.com"
+          target="_blank"
+          style="
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+          "
+          onmouseover="this.style.opacity='1'"
+          onmouseout="this.style.opacity='0.7'"
+        >
+          cicada33.wav@gmail.com
+        </a>
+      </footer>
+
+    </div>
 
   </div>
 
-  <!-- IMAGE VIEWER -->
+  <div id="timer">
+    00:00:00:000
+  </div>
+
+  <div id="secretDiscord">
+    <a
+      href="https://discord.gg/EJjcVEeZEk"
+      target="_blank"
+    >
+      01
+    </a>
+  </div>
 
   <div id="imageViewer" onclick="closeImage()">
     <img id="fullscreenImage">
   </div>
 
   <script>
+
+    const logo = document.getElementById("mainLogo");
+    const siteWrapper = document.getElementById("siteWrapper");
+
+    const hoverSound = new Audio("sound.wav");
+
+    hoverSound.volume = 0.85;
+
+    logo.addEventListener("mouseenter", () => {
+
+      if (window.innerWidth > 768) {
+        siteWrapper.classList.add("blur-active");
+      }
+
+      hoverSound.currentTime = 0;
+      hoverSound.play();
+
+      if (navigator.vibrate) {
+        navigator.vibrate(35);
+      }
+
+    });
+
+    logo.addEventListener("mouseleave", () => {
+      siteWrapper.classList.remove("blur-active");
+    });
+
+    const glow = document.getElementById("cursorGlow");
+
+    document.addEventListener("mousemove", (e) => {
+      glow.style.left = e.clientX + "px";
+      glow.style.top = e.clientY + "px";
+    });
+
+    const sections = document.querySelectorAll("section");
+
+    function revealSections() {
+
+      const triggerBottom = window.innerHeight * 0.88;
+      const triggerTop = window.innerHeight * 0.05;
+
+      sections.forEach(section => {
+
+        if (section.classList.contains("hero")) {
+          section.classList.add("visible");
+          return;
+        }
+
+        const rect = section.getBoundingClientRect();
+
+        const isVisible =
+          rect.top < triggerBottom &&
+          rect.bottom > triggerTop;
+
+        if (isVisible) {
+          section.classList.add("visible");
+        } else {
+          section.classList.remove("visible");
+        }
+
+      });
+
+    }
+
+    window.addEventListener("scroll", revealSections);
+    window.addEventListener("load", revealSections);
+
+    function randomGlitch() {
+
+      const randomDelay =
+        document.body.classList.contains("inverted")
+          ? Math.random() * 2500 + 1200
+          : Math.random() * 20000 + 10000;
+
+      setTimeout(() => {
+
+        logo.classList.add("glitch");
+
+        setTimeout(() => {
+          logo.classList.remove("glitch");
+        }, document.body.classList.contains("inverted") ? 420 : 180);
+
+        randomGlitch();
+
+      }, randomDelay);
+
+    }
+
+    randomGlitch();
 
     function scrollRightCustom(id) {
 
@@ -636,15 +1077,133 @@
 
       document.getElementById("imageViewer").classList.add("active");
 
+      if (navigator.vibrate) {
+        navigator.vibrate(20);
+      }
+
     }
 
     function closeImage() {
-
       document.getElementById("imageViewer").classList.remove("active");
+    }
+
+    const timer = document.getElementById("timer");
+
+    let glitchMode = false;
+
+    function triggerTimerGlitch() {
+
+      glitchMode = true;
+
+      setTimeout(() => {
+        glitchMode = false;
+      }, document.body.classList.contains("inverted") ? 320 : 160);
+
+      const nextGlitch =
+        document.body.classList.contains("inverted")
+          ? Math.random() * 1800 + 900
+          : Math.random() * 8000 + 7000;
+
+      setTimeout(triggerTimerGlitch, nextGlitch);
 
     }
+
+    setTimeout(triggerTimerGlitch, 6000);
+
+    function updateTimer() {
+
+      const now = new Date();
+
+      const hours = now.getHours()
+        .toString()
+        .padStart(2, '0');
+
+      const minutes = now.getMinutes()
+        .toString()
+        .padStart(2, '0');
+
+      const seconds = now.getSeconds()
+        .toString()
+        .padStart(2, '0');
+
+      const milliseconds = now.getMilliseconds()
+        .toString()
+        .padStart(3, '0');
+
+      const day = now.getDate()
+        .toString()
+        .padStart(2, '0');
+
+      const month = (now.getMonth() + 1)
+        .toString()
+        .padStart(2, '0');
+
+      const year = now.getFullYear()
+        .toString()
+        .slice(-2);
+
+      if (glitchMode) {
+
+        timer.innerHTML =
+          `01:01:01<span class="milliseconds">:01</span><span class="date">01/01/01</span>`;
+
+      } else {
+
+        timer.innerHTML =
+          `${hours}:${minutes}:${seconds}<span class="milliseconds">:${milliseconds}</span><span class="date">${day}/${month}/${year}</span>`;
+
+      }
+
+    }
+
+    setTimeout(() => {
+      timer.classList.add("visible");
+    }, 2100);
+
+    updateTimer();
+
+    setInterval(updateTimer, 16);
+
+    let secretCode = "";
+
+    const footerLink = document.getElementById("footerLink");
+
+    document.addEventListener("keydown", (e) => {
+
+      secretCode += e.key;
+
+      if (secretCode.length > 2) {
+        secretCode = secretCode.slice(-2);
+      }
+
+      if (secretCode === "01") {
+
+        document.body.classList.toggle("inverted");
+
+        if (document.body.classList.contains("inverted")) {
+
+          footerLink.textContent = "cicada33.wav@gmail.com";
+          footerLink.href = "https://mail.google.com/mail/?view=cm&fs=1&to=cicada33.wav@gmail.com";
+
+        } else {
+
+          footerLink.textContent = "cicada33.wav@gmail.com";
+          footerLink.href = "https://mail.google.com/mail/?view=cm&fs=1&to=cicada33.wav@gmail.com";
+
+        }
+
+        if (navigator.vibrate) {
+          navigator.vibrate([40, 30, 40]);
+        }
+
+        secretCode = "";
+
+      }
+
+    });
 
   </script>
 
 </body>
 </html>
+
