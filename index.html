@@ -1,6 +1,4 @@
-# index.html
 
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -567,11 +565,44 @@
       pointer-events: auto;
     }
 
+    
+
+    #closeViewer {
+      position: absolute;
+      top: 22px;
+      right: 26px;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 1.6rem;
+      cursor: pointer;
+      z-index: 100001;
+      backdrop-filter: blur(8px);
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        opacity 0.3s ease;
+      opacity: 0.72;
+    }
+
+    #closeViewer:hover {
+      transform: scale(1.08);
+      opacity: 1;
+      background: rgba(255,255,255,0.16);
+    }
+
     #fullscreenScroll {
       display: flex;
       overflow-x: auto;
+      overflow-y: hidden;
       width: 100%;
       height: 100%;
+      gap: 18vw;
+      padding: 0 35vw;
+      box-sizing: border-box;
       align-items: center;
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
@@ -979,6 +1010,8 @@
   </div>
 
   <div id="imageViewer">
+    <button id="closeViewer">×</button>
+
     <div id="fullscreenScroll">
       <img id="fullscreenImage">
     </div>
@@ -1153,7 +1186,7 @@
         img.style.maxWidth = "84%";
         img.style.maxHeight = "90%";
         img.style.borderRadius = "18px";
-        img.style.margin = "auto";
+        img.style.margin = "0 auto";
         img.style.flexShrink = "0";
         img.style.scrollSnapAlign = "center";
         img.style.boxShadow = "0 0 50px rgba(255,255,255,0.12)";
@@ -1170,7 +1203,8 @@
 
         target.scrollIntoView({
           behavior: "instant",
-          inline: "center"
+          inline: "center",
+          block: "nearest"
         });
 
       });
@@ -1184,6 +1218,38 @@
     function closeImage() {
       document.getElementById("imageViewer").classList.remove("active");
     }
+
+    document.getElementById("closeViewer").addEventListener("click", closeImage);
+
+    const fullscreenScroll = document.getElementById("fullscreenScroll");
+
+    fullscreenScroll.addEventListener("scroll", () => {
+
+      const cards = [...fullscreenScroll.children];
+
+      const scrollLeft = fullscreenScroll.scrollLeft;
+      const maxScroll =
+        fullscreenScroll.scrollWidth - fullscreenScroll.clientWidth;
+
+      if (scrollLeft >= maxScroll - 5) {
+
+        fullscreenScroll.scrollTo({
+          left: 0,
+          behavior: "smooth"
+        });
+
+      }
+
+      if (scrollLeft <= 0) {
+
+        fullscreenScroll.scrollTo({
+          left: maxScroll,
+          behavior: "smooth"
+        });
+
+      }
+
+    });
 
     document.getElementById("imageViewer").addEventListener("click", (e) => {
 
@@ -1317,4 +1383,3 @@
 
 </body>
 </html>
-```
