@@ -1,4 +1,6 @@
+# index.html
 
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -594,6 +596,47 @@
       background: rgba(255,255,255,0.16);
     }
 
+    .viewer-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 100002;
+      backdrop-filter: blur(8px);
+      transition:
+        transform 0.3s ease,
+        opacity 0.3s ease,
+        background 0.3s ease;
+      opacity: 0.72;
+    }
+
+    .viewer-arrow:hover {
+      transform: translateY(-50%) scale(1.08);
+      opacity: 1;
+      background: rgba(255,255,255,0.16);
+    }
+
+    .viewer-left {
+      left: 26px;
+    }
+
+    .viewer-right {
+      right: 26px;
+    }
+
+    @media (max-width: 768px) {
+      .viewer-arrow {
+        display: none;
+      }
+    }
+
     #fullscreenScroll {
       display: flex;
       overflow-x: auto;
@@ -1012,6 +1055,14 @@
   <div id="imageViewer">
     <button id="closeViewer">×</button>
 
+    <button class="viewer-arrow viewer-left" onclick="scrollFullscreen(-1)">
+      ‹
+    </button>
+
+    <button class="viewer-arrow viewer-right" onclick="scrollFullscreen(1)">
+      ›
+    </button>
+
     <div id="fullscreenScroll">
       <img id="fullscreenImage">
     </div>
@@ -1219,6 +1270,19 @@
       document.getElementById("imageViewer").classList.remove("active");
     }
 
+    function scrollFullscreen(direction) {
+
+      const fullscreenScroll = document.getElementById("fullscreenScroll");
+
+      const imageWidth = fullscreenScroll.clientWidth;
+
+      fullscreenScroll.scrollBy({
+        left: imageWidth * direction,
+        behavior: "smooth"
+      });
+
+    }
+
     document.getElementById("closeViewer").addEventListener("click", closeImage);
 
     const fullscreenScroll = document.getElementById("fullscreenScroll");
@@ -1383,3 +1447,4 @@
 
 </body>
 </html>
+```
