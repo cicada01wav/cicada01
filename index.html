@@ -388,6 +388,44 @@ test 4
       filter: brightness(1.08);
     }
 
+.caption-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.caption {
+  margin-top: 0;
+  padding: 0 4px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.68);
+  line-height: 1.45;
+  text-align: right;
+  width: auto;
+  box-sizing: border-box;
+}
+
+.caption-left {
+  margin-top: 0;
+  padding: 0 4px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.68);
+  line-height: 1.45;
+  text-align: left;
+  width: auto;
+  box-sizing: border-box;
+}
+
     .poster-card {
       min-width: 360px;
       width: fit-content;
@@ -958,10 +996,10 @@ test 4
 
       </section>
 
-      <section>
+<section>
 
   <div class="section-title">
-    mix/sound design
+    métrage
   </div>
 
   <div class="scroll-wrapper">
@@ -978,25 +1016,81 @@ test 4
       id="sounddesignScroll"
     >
 
-      <div class="card">
+      <!-- vidéo 1 -->
+      <div>
 
-        <video
-          class="youtube-player"
-          controls
-          playsinline
-          preload="metadata"
-          style="
-            width:100%;
-            height:100%;
-            object-fit:cover;
-            background:black;
-          "
-        >
-          <source
-            src="NOUVONE_2800.mp4"
-            type="video/mp4"
+        <div class="card">
+
+          <video
+            class="youtube-player"
+            controls
+            playsinline
+            preload="metadata"
+            style="
+              width:100%;
+              height:100%;
+              object-fit:cover;
+              background:black;
+            "
           >
-        </video>
+            <source
+              src="NOUVONE_2800.mp4"
+              type="video/mp4"
+            >
+          </video>
+
+        </div>
+
+        <div class="caption-row">
+
+          <div class="caption-left">
+            NOUVONÉ
+          </div>
+
+          <div class="caption">
+            mix/sound design
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- vidéo 2 -->
+      <div>
+
+        <div class="card">
+
+          <video
+            class="youtube-player"
+            controls
+            playsinline
+            preload="metadata"
+            style="
+              width:100%;
+              height:100%;
+              object-fit:cover;
+              background:black;
+            "
+          >
+            <source
+              src="-Le temps dun souvenir- NIKON Festival (film fiction).mp4"
+              type="video/mp4"
+            >
+          </video>
+
+        </div>
+
+        <div class="caption-row">
+
+          <div class="caption-left">
+            Alban Weisser
+          </div>
+
+          <div class="caption">
+            IngéSon/Compo
+          </div>
+
+        </div>
 
       </div>
 
