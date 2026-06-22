@@ -396,6 +396,21 @@
   width: 100%;
 }
 
+.caption-center {
+  flex: 1;
+  margin-top: 0;
+  padding: 0 4px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.68);
+  line-height: 1.45;
+  text-align: center;
+  box-sizing: border-box;
+}
+
 .caption {
   margin-top: 0;
   padding: 0 4px;
@@ -475,6 +490,38 @@
       display: block;
       background: black;
     }
+
+.rental-card {
+  min-width: 360px;
+  width: fit-content;
+  height: auto;
+  background: #111;
+  border-radius: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid #333;
+  position: relative;
+  transition:
+    transform 0.45s ease,
+    filter 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.rental-card:hover {
+  transform: scale(1.04);
+  filter: brightness(1.06);
+  box-shadow: 0 0 35px rgba(255,255,255,0.08);
+}
+
+.rental-image {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
+  display: block;
+  background: black;
+}
 
     @media (max-width: 768px) {
       .youtube-thumbnail {
@@ -631,7 +678,6 @@
 
     #closeViewer:hover {
       transform: scale(1);
-        height: 232px;
       opacity: 1;
       background: rgba(255,255,255,0.16);
     }
@@ -799,6 +845,17 @@
         border-radius: 16px;
       }
 
+.rental-card {
+  min-width: 210px;
+  width: fit-content;
+  height: auto;
+  border-radius: 16px;
+}
+
+.rental-image {
+  max-height: 232px;
+}
+
       .arrow {
         width: 40px;
         height: 40px;
@@ -958,20 +1015,24 @@
         <img class="youtube-thumbnail" src="babylove.jpg">
       </div>
 
+      <div class="poster-card" onclick="openImage('fatras.jpeg')">
+        <img class="youtube-thumbnail" src="fatras.jpeg">
+      </div>
+
       <div class="poster-card" onclick="openImage('quasar.jpg')">
         <img class="youtube-thumbnail" src="quasar.jpg">
       </div>
 
-      <div class="poster-card" onclick="openImage('Ligne53.jpeg')">
-        <img class="youtube-thumbnail" src="Ligne53.jpeg">
+      <div class="poster-card" onclick="openImage('ligne53.jpeg')">
+        <img class="youtube-thumbnail" src="ligne53.jpeg">
       </div>
 
       <div class="poster-card" onclick="openImage('IMG_4659.jpeg')">
         <img class="youtube-thumbnail" src="IMG_4659.jpeg">
       </div>
 
-      <div class="poster-card" onclick="openImage('Nausicaacergy.jpeg')">
-        <img class="youtube-thumbnail" src="Nausicaacergy.jpeg">
+      <div class="poster-card" onclick="openImage('nausicaacergy.jpeg')">
+        <img class="youtube-thumbnail" src="nausicaacergy.jpeg">
       </div>
 
       <div class="poster-card" onclick="openImage('serom.jpg')">
@@ -982,7 +1043,6 @@
         <img class="youtube-thumbnail" src="loveletter.jpeg">
       </div>
 
-      <!-- UNION -->
       <div class="poster-card" onclick="openImage('union.jpeg')">
         <img class="youtube-thumbnail" src="union.jpeg">
       </div>
@@ -1003,11 +1063,10 @@
         <img class="youtube-thumbnail" src="summer.jpg">
       </div>
 
-      <div class="poster-card" onclick="openImage('Dgr.jpeg')">
-        <img class="youtube-thumbnail" src="Dgr.jpeg">
+      <div class="poster-card" onclick="openImage('nebuleuse2.jpeg')">
+        <img class="youtube-thumbnail" src="nebuleuse2.jpeg">
       </div>
 
-      <!-- NEBULEUSE -->
       <div class="poster-card" onclick="openImage('nebuleuse.jpeg')">
         <img class="youtube-thumbnail" src="nebuleuse.jpeg">
       </div>
@@ -1426,6 +1485,78 @@
           cicada33.wav@gmail.com
         </a>
       </footer>
+
+<section>
+
+  <div class="section-title">
+    location
+  </div>
+
+  <div class="scroll-wrapper">
+
+    <div class="horizontal-scroll">
+
+      <!-- Produit 1 -->
+      <div class="rental-card">
+
+        <img
+          class="rental-image"
+          src="ecoflow.jpg"
+          alt="ECOFLOW RIVER 3"
+        >
+
+        <div class="caption-row">
+
+          <div class="caption-left">
+            ECOFLOW RIVER 3 - 230Wh - 3Kg
+          </div>
+
+ <div class="caption-center">
+    BATTERIE PORTABLE
+  </div>
+
+          <div class="caption">
+            15€ / jours
+          </div>
+
+        </div>
+
+    <div>
+
+  <div class="rental-card" onclick="openImage('bose.jpg')">
+
+    <img
+      class="rental-image"
+      src="bose.jpg"
+      alt="BOSE Roommate 2"
+    >
+
+  </div>
+
+  <div class="caption-row">
+
+    <div class="caption-left">
+      BOSE ROOMMATE 2
+    </div>
+
+    <div class="caption-center">
+      PAIRE D'ENCEINTES ACTIVES
+    </div>
+
+    <div class="caption">
+      10€ / JOUR
+    </div>
+
+  </div>
+
+</div>
+
+    </div>
+
+  </div>
+
+</section>
+
 
     </div>
 
